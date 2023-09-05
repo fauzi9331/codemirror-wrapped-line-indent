@@ -1,0 +1,30 @@
+{
+  "name": "codemirror-wrapped-line-indent",
+  "version": "0.0.1",
+  "description": "A plugin for CodeMirror to handle wrapped line indentation",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fauzi9331/codemirror-wrapped-line-indent"
+  },
+  "scripts": {
+    "build:cjs": "tsc --module commonjs --outDir ./dist && mv ./dist/index.js ./dist/index.cjs",
+    "build:esm": "tsc --module ES2020 --outDir ./dist",
+    "build": "npm run build:cjs && npm run build:esm"
+  },
+  "author": "Muhammad Iqbal Fauzi",
+  "license": "MIT",
+  "peerDependencies": {
+    "@codemirror/language": "6.9.0",
+    "@codemirror/state": "6.2.1",
+    "@codemirror/view": "6.17.1"
+  },
+  "devDependencies": {
+    "@codemirror/language": "6.9.0",
+    "@codemirror/state": "6.2.1",
+    "@codemirror/view": "6.17.1",
+    "typescript": "5.2.2"
+  }
+}
