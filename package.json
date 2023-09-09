@@ -17,14 +17,14 @@
   "author": "Muhammad Iqbal Fauzi",
   "license": "MIT",
   "peerDependencies": {
-    "@codemirror/language": "6.9.0",
-    "@codemirror/state": "6.2.1",
-    "@codemirror/view": "6.17.1"
+    "@codemirror/language": "^6.9.0",
+    "@codemirror/state": "^6.2.1",
+    "@codemirror/view": "^6.17.1"
   },
   "devDependencies": {
-    "@codemirror/language": "6.9.0",
-    "@codemirror/state": "6.2.1",
-    "@codemirror/view": "6.17.1",
-    "typescript": "5.2.2"
+    "@codemirror/language": "^6.9.0",
+    "@codemirror/state": "^6.2.1",
+    "@codemirror/view": "^6.17.1",
+    "typescript": "^5.2.2"
   }
 }
