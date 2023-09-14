@@ -2,6 +2,11 @@
   "name": "codemirror-wrapped-line-indent",
   "version": "0.0.2",
   "description": "A plugin for CodeMirror to handle wrapped line indentation",
+  "keywords": [
+    "codemirror",
+    "wrapped",
+    "indent"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
