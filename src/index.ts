@@ -37,7 +37,7 @@ class WrappedLineIndent implements PluginValue {
   private generate(state: EditorState) {
     const builder = new RangeSetBuilder<Decoration>();
     if (this.initialPaddingLeft) {
-      this.addStyleToBuilder(builder, state, this.initialPaddingLeft)
+      this.addStyleToBuilder(builder, state, this.initialPaddingLeft);
     } else {
       this.view.requestMeasure({
         read: (view) => {
@@ -46,14 +46,18 @@ class WrappedLineIndent implements PluginValue {
             this.initialPaddingLeft = window
               .getComputedStyle(lineElement)
               .getPropertyValue("padding-left");
-            this.addStyleToBuilder(builder, view.state, this.initialPaddingLeft);
+            this.addStyleToBuilder(
+              builder,
+              view.state,
+              this.initialPaddingLeft
+            );
           }
 
           this.decorations = builder.finish();
         },
       });
     }
-    this.decorations = builder.finish()
+    this.decorations = builder.finish();
   }
 
   private addStyleToBuilder(
@@ -63,9 +67,9 @@ class WrappedLineIndent implements PluginValue {
   ) {
     const visibleLines = this.getVisibleLines(state);
     for (const line of visibleLines) {
-      const indentSize = this.getIndentSize(line);
+      const numColumns = this.numColumns(line.text, state.tabSize);
       const paddingValue = `calc(${
-        indentSize + this.indentUnit
+        numColumns + this.indentUnit
       }ch + ${initialPaddingLeft})`;
       builder.add(
         line.from,
@@ -73,7 +77,7 @@ class WrappedLineIndent implements PluginValue {
         Decoration.line({
           attributes: {
             style: `padding-left: ${paddingValue}; text-indent: -${
-              indentSize + this.indentUnit
+              numColumns + this.indentUnit + 0.1
             }ch;`,
           },
         })
@@ -100,8 +104,27 @@ class WrappedLineIndent implements PluginValue {
     return lines;
   }
 
-  private getIndentSize(line: Line) {
-    return (line.text.length - line.text.trimStart().length) * this.view.state.tabSize;
+  numColumns(str: string, tabSize: number) {
+    let col = 0;
+    loop: for (let i = 0; i < str.length; i++) {
+      switch (str[i]) {
+        case " ": {
+          col += 1;
+          continue loop;
+        }
+        case "\t": {
+          col += tabSize - (col % tabSize);
+          continue loop;
+        }
+        case "\r": {
+          continue loop;
+        }
+        default: {
+          break loop;
+        }
+      }
+    }
+    return col;
   }
 }
 
