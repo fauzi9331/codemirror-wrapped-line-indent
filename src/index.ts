@@ -77,7 +77,7 @@ class WrappedLineIndent implements PluginValue {
         Decoration.line({
           attributes: {
             style: `padding-left: ${paddingValue}; text-indent: -${
-              numColumns + this.indentUnit + 0.1
+              numColumns + this.indentUnit
             }ch;`,
           },
         })
