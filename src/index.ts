@@ -101,7 +101,7 @@ class WrappedLineIndent implements PluginValue {
   }
 
   private getIndentSize(line: Line) {
-    return line.text.length - line.text.trimStart().length;
+    return (line.text.length - line.text.trimStart().length) * this.view.state.tabSize;
   }
 }
 
