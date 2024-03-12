@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm i
       - run: npm run build
 
   publish-npm:
@@ -27,6 +28,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: npm i
       - run: npm version prerelease --preid=alpha
       - run: npm publish --tag next
         env:
