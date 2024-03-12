@@ -29,6 +29,8 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm i
+      - run: git config --global user.email "iqbalfauzi9331@gmail.com"
+      - run: git config --global user.name "Muhammad Iqbal Fauzi"
       - run: npm version prerelease --preid=alpha
       - run: npm publish --tag next
         env:
