@@ -21,8 +21,6 @@
     "build:cjs": "tsc --module commonjs --outDir ./dist && mv ./dist/index.js ./dist/index.cjs",
     "build:esm": "tsc --module ES2020 --outDir ./dist",
     "build": "npm run build:cjs && npm run build:esm",
-    "version": "npm version",
-    "publish": "npm publish"
   },
   "author": "Muhammad Iqbal Fauzi",
   "license": "MIT",
