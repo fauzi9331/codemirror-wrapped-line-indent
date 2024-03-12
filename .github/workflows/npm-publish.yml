@@ -32,7 +32,9 @@ jobs:
       - run: git config --global user.email "iqbalfauzi9331@gmail.com"
       - run: git config --global user.name "Muhammad Iqbal Fauzi"
       - run: npm version prerelease --preid=alpha
+      - uses: actions-js/push@dev
+      - with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
-      - uses: stefanzweifel/git-auto-commit-action@v5
