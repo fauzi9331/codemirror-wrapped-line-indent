@@ -28,14 +28,13 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm i
-      - run: git config --global user.email "iqbalfauzi9331@gmail.com"
-      - run: git config --global user.name "Muhammad Iqbal Fauzi"
-      - run: npm version prerelease --preid=alpha
-      - uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'dev'
-      - run: npm publish --tag next
+      - name: bump version
+        run: |
+          git config --global user.email "iqbalfauzi9331@gmail.com"
+          git config --global user.name "Muhammad Iqbal Fauzi"
+          npm version prerelease --preid=alpha
+          git push
+      - name: publish
+        run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
