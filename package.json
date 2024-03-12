@@ -1,6 +1,6 @@
 {
   "name": "codemirror-wrapped-line-indent",
-  "version": "1.0.6-alpha.2",
+  "version": "1.0.6-alpha.5",
   "description": "A plugin for CodeMirror to handle wrapped line indentation",
   "keywords": [
     "codemirror",
