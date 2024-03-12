@@ -101,6 +101,7 @@ class WrappedLineIndent implements PluginValue {
         pos = line.to + 1;
       }
     }
+    
     return lines;
   }
 
