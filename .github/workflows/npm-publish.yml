@@ -35,3 +35,4 @@ jobs:
       - run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_SECRET}}
+      - uses: stefanzweifel/git-auto-commit-action@v5
