@@ -69,18 +69,23 @@ class WrappedLineIndent implements PluginValue {
   ) {
     const visibleLines = this.getVisibleLines(state);
     for (const line of visibleLines) {
-      const numColumns = this.numColumns(line.text, state.tabSize);
+      const { numColumns, containsTab } = this.numColumns(
+        line.text,
+        state.tabSize
+      );
       const paddingValue = `calc(${
         numColumns + this.indentUnit
       }ch + ${initialPaddingLeft})`;
+      const textIndentValue = this.isChrome
+        ? `calc(-${numColumns + this.indentUnit}ch - ${containsTab ? 1 : 0}px)`
+        : `-${numColumns + this.indentUnit}ch`;
+
       builder.add(
         line.from,
         line.from,
         Decoration.line({
           attributes: {
-            style: `padding-left: ${paddingValue}; text-indent: -${
-              numColumns + this.indentUnit + (this.isChrome ? 1 : 0)
-            }ch;`,
+            style: `padding-left: ${paddingValue}; text-indent: ${textIndentValue};`,
           },
         })
       );
@@ -107,15 +112,17 @@ class WrappedLineIndent implements PluginValue {
   }
 
   numColumns(str: string, tabSize: number) {
-    let col = 0;
+    let cols = 0;
+    let containsTab = false;
     loop: for (let i = 0; i < str.length; i++) {
       switch (str[i]) {
         case " ": {
-          col += 1;
+          cols += 1;
           continue loop;
         }
         case "\t": {
-          col += tabSize - (col % tabSize);
+          cols += tabSize - (cols % tabSize);
+          containsTab = true;
           continue loop;
         }
         case "\r": {
@@ -126,7 +133,7 @@ class WrappedLineIndent implements PluginValue {
         }
       }
     }
-    return col;
+    return { numColumns: cols, containsTab };
   }
 }
 
