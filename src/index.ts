@@ -14,13 +14,11 @@ class WrappedLineIndent implements PluginValue {
   decorations!: DecorationSet;
   initialPaddingLeft: string | null;
   indentUnit: number;
-  isChrome: boolean;
 
   constructor(view: EditorView) {
     this.view = view;
     this.indentUnit = getIndentUnit(view.state);
     this.initialPaddingLeft = null;
-    this.isChrome = window?.navigator.userAgent.includes("Chrome");
     this.generate(view.state);
   }
 
@@ -79,7 +77,7 @@ class WrappedLineIndent implements PluginValue {
         Decoration.line({
           attributes: {
             style: `padding-left: ${paddingValue}; text-indent: -${
-              numColumns + this.indentUnit + (this.isChrome ? 1 : 0)
+              numColumns + this.indentUnit
             }ch;`,
           },
         })
