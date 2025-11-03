@@ -47,7 +47,7 @@ class WrappedLineIndent implements PluginValue {
           if (lineElement) {
             this.initialPaddingLeft = window
               .getComputedStyle(lineElement)
-              .getPropertyValue("padding-left");
+              .getPropertyValue("padding-inline-start");
             this.addStyleToBuilder(
               builder,
               view.state,
@@ -85,7 +85,7 @@ class WrappedLineIndent implements PluginValue {
         line.from,
         Decoration.line({
           attributes: {
-            style: `padding-left: ${paddingValue}; text-indent: ${textIndentValue};`,
+            style: `padding-inline-start: ${paddingValue}; text-indent: ${textIndentValue};`,
           },
         })
       );
